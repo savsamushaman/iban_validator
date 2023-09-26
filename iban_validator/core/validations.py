@@ -9,6 +9,10 @@ ALLOWED_COUNTRIES = {
 
 ### Validations of the field 'iban' ###
 
+
+# It's far more efficient to validate this data in the front-end, so the back-end is not spammed with requests
+# Only data that can't be validated in the FE, should be sent to the BE
+
 def validate_country_code(iban:str) -> None:
     """Validates the country code of IBAN number"""
     country_code = iban[:2]
