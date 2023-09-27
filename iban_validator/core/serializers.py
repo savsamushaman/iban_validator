@@ -45,7 +45,6 @@ class IBANSerializer(serializers.HyperlinkedModelSerializer):
 
         # allow_invalid = False, will disable the storing of well formatted but invalid IBANs
         if iban_is_valid(data['iban']):
-            # is_valid is false by default
             data['is_valid'] = True
         else:
             data['is_valid'] = False
