@@ -22,7 +22,8 @@ def validate_country_code(iban:str) -> None:
     
     if country_code not in ALLOWED_COUNTRIES.keys():
         # optional check, can be deleted if other countires are added
-        raise serializers.ValidationError('Invalid country code. Only IBANs originating from Montenegro are allowed')
+        validate_country_codes = ''.join(list(ALLOWED_COUNTRIES.keys()))
+        raise serializers.ValidationError(f'Invalid country code. Only IBANs originating from Montenegro are allowed. Valid country codes: {validate_country_codes}.')
 
     return True
 
@@ -50,13 +51,13 @@ def validate_iban_len_country_specific(iban:str) -> None:
 # Implement a feature that stores and provides access to the history of validated IBANs. 
 # The API should offer an endpoint to retrieve a list of validated IBANs along with their **validation status** and timestamps.
 
-# The fact that the stored model instance has a **validation status** lets me think that IBANs that are formatted OK but !not valid! are allowed to be stored
+# The fact that the stored model instance has a **validation status** makes me think that IBANs that are formatted OK but !not valid! are allowed to be stored
 # I will implement this check with a switch that allows this feature to be turned on and off
 
 def iban_is_valid(iban:str, allow_invalid=False) -> None:
     """Check if the IBAN number is valid, and not a random one"""
     if not iban_is_genuine(iban):
         if not allow_invalid:
-            raise serializers.ValidationError({"iban": "The IBAN is invalid",})
+            raise serializers.ValidationError({"iban": "The IBAN you entered is INVALID",})
         return False
     return True

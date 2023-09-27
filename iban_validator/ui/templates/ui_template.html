@@ -24,45 +24,6 @@
     </button>
 
     <p id="status"></p>
-
-    <script>
-      function sendPostRequest(data) {
-        const statusElement = document.getElementById("status");
-        const inputElement = document.getElementById("userInput");
-        const is_commited = data["commit"];
-
-        fetch("http://127.0.0.1:8000/api/ibans/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => {
-            return response.json();
-          })
-
-          .then((data) => {
-            if (data["is_valid"] === false) {
-              if (data["errors"].length === 0) {
-                statusElement.textContent = "Invalid IBAN";
-                if (is_commited) {
-                  inputElement.value = "";
-                  statusElement.textContent = "Your invalid IBAN was stored !";
-                }
-              } else {
-                statusElement.textContent = data["errors"][0];
-              }
-            } else {
-              statusElement.textContent = "IBAN is valid";
-              if (is_commited) {
-                inputElement.value = "";
-                statusElement.textContent =
-                  "Your IBAN was validated and stored !";
-              }
-            }
-          });
-      }
-    </script>
+    <script src="{% static 'post_request.js' %}"></script>
   </body>
 </html>
