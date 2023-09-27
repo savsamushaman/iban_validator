@@ -29,7 +29,7 @@
 
 For a list of previously validated IBAN numbers send a GET request to http://127.0.0.1:8000/api/ibans/
 
-To validate your IBAN number send a POST request http://127.0.0.1:8000/api/ibans/.
+To validate your IBAN number send a POST request to http://127.0.0.1:8000/api/ibans/.
 
 `Requests examples`
 
