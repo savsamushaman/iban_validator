@@ -36,7 +36,6 @@ AUTH_USER_MODEL = 'core.CustomUser'
 INSTALLED_APPS = [
     'rest_framework',
     'core',
-    'ui',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -136,7 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 5
+    'PAGE_SIZE': 20
 }
 
 CORS_ORIGIN_WHITELIST = (

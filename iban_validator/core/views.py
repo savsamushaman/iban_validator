@@ -1,37 +1,38 @@
 from django.contrib.auth import get_user_model
 
-from rest_framework import status
-from rest_framework import viewsets
+from rest_framework import status, viewsets, generics
 from rest_framework.response import Response
 
-from core.serializers import IBANSerializer, UserSerializer
+from core.serializers import UserSerializer, GetIBANSerializer, PostIBANSerializer
 from core.models import IBAN
+from core.mixins import SerializerByMethodMixin
 
-class UserViewSet(viewsets.ModelViewSet):
+class User(viewsets.ModelViewSet):
     """
-    API endpoint that allows users to be viewed or edited.
+    API endpoint that allows viewing of the users.
     """
     model = get_user_model()
     queryset = model.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
 
-class IBANViewset(viewsets.ModelViewSet):
+class IBAN(SerializerByMethodMixin, viewsets.ModelViewSet):
 
-    model = IBAN
-    queryset = model.objects.all()
-    serializer_class = IBANSerializer
+    queryset = IBAN.objects.all()
+    
+    serializer_map = {
+        'GET': GetIBANSerializer,
+        'POST': PostIBANSerializer,
+    }
 
     def create(self, request, *args, **kwargs):
 
-        serializer = IBANSerializer(data=request.data)
-        
+        serializer = PostIBANSerializer(data=request.data)
         response = {}
 
         if serializer.is_valid():
             commit = request.data.get('commit')
             commit = True if commit is None else commit
-
             # makes more sense to turn committing off, then turn comitting on
             if commit != False:
                 serializer.save()
