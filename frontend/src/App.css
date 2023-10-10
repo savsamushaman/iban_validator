@@ -32,6 +32,7 @@
   justify-content: center;
   text-align: center;
   padding: 50px;
+  margin: 10px;
 }
 
 .submitButton {
@@ -45,4 +46,20 @@
   justify-content: center;
   text-align: center;
   border-radius: 8px;
+}
+
+.iban_list {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+}
+
+.iban_entry {
+  background-color: rgba(255, 255, 255, 0.6);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+  padding: 15px;
 }

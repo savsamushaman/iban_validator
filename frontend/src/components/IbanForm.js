@@ -22,7 +22,6 @@ function IbanForm() {
 
     try {
       let response = await axiosInstance.post("/ibans/", payload);
-      console.log(response);
       if (commit) {
         input_field.value = "";
         setMessage("Validation OK. Your IBAN was saved to the database.");
@@ -32,7 +31,6 @@ function IbanForm() {
         ? setMessage("Your IBAN is valid")
         : setMessage("Your IBAN is invalid");
     } catch (error) {
-      console.log(error);
       error.code !== "ERR_NETWORK" && error.code !== "ERR_BAD_RESPONSE"
         ? setMessage(error.response.data.errors[0])
         : setMessage("Network unavailable, try again later");

@@ -11,7 +11,6 @@ const url = currentProtocol + "//" + currentHost + uri;
 
 const axiosInstance = axios.create({
   headers: {
-    //Common authorization keywords can be JWT, Bearer or Token (old)
     accept: "application/json",
     "X-CSRFTOKEN": Cookies.get("csrftoken"),
     "Content-Type": "application/json",
